@@ -21,30 +21,47 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Determine Release Tag
+      - name: Determine Release Tag and Version
         id: vars
         run: |
           if [[ "${{ github.ref }}" == refs/tags/* ]]; then
             TAG_NAME="${GITHUB_REF#refs/tags/}"
+            VERSION="${TAG_NAME#v}"
           else
-            TAG_NAME="v0.1.1"
+            VERSION=$(python3 -c "import json; print(json.load(open('manifest.json'))['version'])")
+            TAG_NAME="v${VERSION}"
           fi
           echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Extract Release Notes from CHANGELOG
+        id: changelog
+        run: |
+          python3 -c "
+          import re
+          from pathlib import Path
+          ver = '${{ steps.vars.outputs.version }}'
+          txt = Path('CHANGELOG.md').read_text(encoding='utf-8') if Path('CHANGELOG.md').exists() else ''
+          m = re.search(r'##\s*\[v?' + re.escape(ver) + r'\][^\n]*\n([\s\S]*?)(?=\n##\s*\[|\Z)', txt)
+          notes = m.group(1).strip() if m else 'LanternED v' + ver + ' native cross-platform release'
+          Path('release_notes.md').write_text(notes, encoding='utf-8')
+          "
 
       - name: Publish or Update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.vars.outputs.tag }}
           name: LanternED ${{ steps.vars.outputs.tag }} Native Ecosystem
+          body_path: release_notes.md
           draft: false
           prerelease: false
           make_latest: true
-          generate_release_notes: true
+          generate_release_notes: false
           files: |
-            windows/LanternEd-Setup-0.1.1.exe
-            macos/LanternEd-0.1.1-universal.dmg
-            android/LanternEd-v0.1.1.apk
-            ios/LanternEd-v0.1.1.ipa
+            windows/LanternEd-Setup-${{ steps.vars.outputs.version }}.exe
+            macos/LanternEd-${{ steps.vars.outputs.version }}-universal.dmg
+            android/LanternEd-v${{ steps.vars.outputs.version }}.apk
+            ios/LanternEd-v${{ steps.vars.outputs.version }}.ipa
             manifest.json
             CHANGELOG.md
         env:
