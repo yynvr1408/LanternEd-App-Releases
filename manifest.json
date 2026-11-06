@@ -8,7 +8,7 @@
       "fileName": "LanternEd-Setup-0.1.1.exe",
       "installerType": "exe",
       "downloadUrl": "/api/v1/releases/download/windows",
-      "fileSizeMb": 2.0,
+      "fileSizeMb": 1.98,
       "sha256": "473bc7353cf6fbf752345b9a477c0b01b35897a46e7df01188778756afa669a7",
       "minOsVersion": "Windows 10 / 11 (64-bit)",
       "arch": "x64"
@@ -18,8 +18,8 @@
       "fileName": "LanternEd-0.1.1-universal.dmg",
       "installerType": "dmg",
       "downloadUrl": "/api/v1/releases/download/macos",
-      "fileSizeMb": 0.0,
-      "sha256": "2380bbb5ae64b6f85202d2627757a78d5ee86b58809e1d2fa6a072f31fada38e",
+      "fileSizeMb": 6.72,
+      "sha256": "a1302cde356516aa9b4cc7daef4b8a240cd4ee632817d11a6604cb3f1d767643",
       "minOsVersion": "macOS 10.15+ (Catalina through Sequoia)",
       "arch": "Universal (Apple Silicon & Intel)"
     },
@@ -38,8 +38,8 @@
       "fileName": "LanternEd-v0.1.1.ipa",
       "installerType": "ipa",
       "downloadUrl": "/api/v1/releases/download/ios",
-      "fileSizeMb": 0.0,
-      "sha256": "788c528fd4fcd65ec8da28287c55eb2e9f04222969bb895cd201db38673dc954",
+      "fileSizeMb": 1.28,
+      "sha256": "f84f61ab3c7ddbd18e81febf6f7529c63b29311a54ccbb8db5147b3701b74c16",
       "minOsVersion": "iOS 14.0+ (iPhone & iPad)",
       "arch": "arm64"
     }
