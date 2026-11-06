@@ -29,6 +29,25 @@ All binaries below are production-compiled, cryptographically hashed, and hosted
 
 ---
 
+## ⏱️ 24-Hour Engineering Sprint Timeline (10:00 AM → 10:00 AM)
+
+LanternED and all 4 native applications were built and released in a high-intensity 24-hour engineering sprint:
+
+| Time Window | Sprint Phase & Focus | Native Engineering Milestones |
+| :--- | :--- | :--- |
+| **10:00 AM – 12:00 PM** | **Core Architecture** | Schema design, FastAPI services, and native IPC communication contracts. |
+| **12:00 PM – 02:30 PM** | **Academic Hierarchy** | Multitenancy routing and offline SQLite / Dexie schema initialization. |
+| **02:30 PM – 05:00 PM** | **Adaptive Audio RTC** | LiveKit WebRTC SFU integration with Opus DTX 12 kbps low-bandwidth tuning. |
+| **05:00 PM – 07:30 PM** | **Lockdown Exam Suite** | Fullscreen locks, tab blur detection, and offline submission receipt signing. |
+| **07:30 PM – 10:00 PM** | **Offline Sync Engine** | Two-way conflict resolution, optimistic queues, and offline draft storage. |
+| **10:00 PM – 12:30 AM** | **CIA & Rubric Grading** | Split-screen evaluator, Bloom's Taxonomy, and CO-PO attainment matrices. |
+| **12:30 AM – 03:00 AM** | **Native Packaging** | Compiling Windows Inno Setup (.exe), macOS DMG, Android APK, and iOS IPA. |
+| **03:00 AM – 05:30 AM** | **Localization & i18n** | 21 pre-compiled languages including Telugu with zero network overhead. |
+| **05:30 AM – 08:00 AM** | **Cloud Deployment** | Vercel, Render, Cloudflare R2, and Neon PostgreSQL 18 ingress. |
+| **08:00 AM – 10:00 AM** | **Release Publishing** | Automated CI/CD release tagging, 920 automated tests, and video walkthrough. |
+
+---
+
 ## ⚡ Native Application Advantages Over Web Browsers
 
 While LanternED is accessible through any modern web browser at [https://lantern-ed.vercel.app](https://lantern-ed.vercel.app), our compiled native applications provide deep OS-level capabilities required for rural connectivity:
@@ -38,7 +57,7 @@ While LanternED is accessible through any modern web browser at [https://lantern
 | **DirectML / Neural Speech-to-Text** | Cloud fallback only (requires internet) | **100% On-Device Whisper AI** (zero bandwidth, GPU accelerated) |
 | **Campus LAN Server Mode** | Not available (browser sandbox) | **Embedded LAN Server** (broadcasts lessons over local Wi-Fi without internet) |
 | **Lockdown Examination Suite** | Tab-blur warnings only | **OS-Level Process Lockdown** (blocks Alt-Tab, task switching, shortcuts) |
-| **Offline Storage Quota** | Browser Cache (evicted when disk is low) | **Permanent Encrypted SQLite Store** (persists audiobooks & assignments) |
+| **Offline Storage Quota** | Browser Cache (evicted when disk is low) | **Permanent Encrypted Store** (persists audiobooks & assignments) |
 | **Memory Footprint** | ~350 MB - 600 MB (Chromium tab overhead) | **<50 MB RAM** (native WebView2 / WKWebView container) |
 | **Background Synchronization** | Paused when tab is inactive | **Persistent Background Sync** (auto-submits when 2G/3G returns) |
 
@@ -70,8 +89,6 @@ While LanternED is accessible through any modern web browser at [https://lantern
 
 ## 🔒 Cryptographic SHA-256 Checksum Verification
 
-To guarantee that your downloaded file has not been altered or corrupted in transit, compare its SHA-256 hash against the official registry:
-
 ```
 Windows (LanternEd-Setup-0.1.1.exe):
 473bc7353cf6fbf752345b9a477c0b01b35897a46e7df01188778756afa669a7
@@ -86,38 +103,17 @@ iOS (LanternEd-v0.1.1.ipa):
 f84f61ab3c7ddbd18e81febf6f7529c63b29311a54ccbb8db5147b3701b74c16
 ```
 
-### Verification Commands
-
-- **Windows PowerShell:**
-  ```powershell
-  Get-FileHash -Algorithm SHA256 .\LanternEd-Setup-0.1.1.exe
-  ```
-- **macOS / Linux Terminal:**
-  ```bash
-  shasum -a 256 LanternEd-0.1.1-universal.dmg
-  ```
-- **Android (Termux / Linux):**
-  ```bash
-  sha256sum LanternEd-v0.1.1.apk
-  ```
-
 ---
 
-## 🔄 Built-In Automatic Updates
+## 🔄 Automated Release Workflow
 
-LanternED native applications incorporate an integrated **Update Engine**. In-app updates query `manifest.json` on launch:
-1. When a new version is released, an update notification pill appears in the top navigation bar.
-2. Clicking **"Update Now"** downloads the latest lightweight delta patch and applies it without requiring manual browser downloads.
-
----
-
-## 🏛️ Security & Zero-Trust Governance
-
-- **Student Portal, Teacher Console & Institution Console:** Fully supported on all native desktop and mobile platforms.
-- **Platform Super-Administrator Console (`/super-admin`):** Strictly restricted to verified browser sessions with multi-factor authentication. Native client binaries explicitly block super-admin routing to prevent privilege escalation on shared campus devices.
+For every update to the application source code:
+1. Update `manifest.json` and `CHANGELOG.md` with new features and version numbers.
+2. Tag the commit: `git tag v0.1.2 && git push origin v0.1.2`.
+3. GitHub Actions builds the release, extracts the changelog description, attaches all 4 application binaries, and marks the release as `latest`.
+4. In-app update notifications notify users automatically on next launch.
 
 ---
 
 ## 📄 License
-
-LanternED is open-source software licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
+Distributed under the **MIT License**. See [LICENSE](LICENSE) for details.
